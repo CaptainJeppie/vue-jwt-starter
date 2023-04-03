@@ -7,9 +7,9 @@
             >Home</router-link
           >
         </li>      
-        <li class="nav-item">
-          <router-link to="/products" class="nav-link" active-class="active"
-            >Products</router-link
+        <li class="nav-item" v-if="store.isLoggedIn">
+          <router-link to="/todolist" class="nav-link" active-class="active"
+            >To-do-list</router-link
           >
         </li>
         <li class="nav-item">
@@ -23,7 +23,14 @@
 </template>
 
 <script>
+import { useHenkStore } from "../stores/store";
+
 export default {
+  setup() {
+    return{
+      store: useHenkStore()
+    }
+    },
   name: "Navigation",
 };
 </script>
