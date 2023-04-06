@@ -39,7 +39,13 @@ export default {
           password: this.password,
         })
         .then((res) => {
-          this.$router.push('/products');
+          localStorage.setItem('jwt', res.data.jwt);
+          localStorage.setItem('username', res.data.username);
+          localStorage.setItem('loggedIn', true);
+
+          axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.jwt;
+
+          this.$router.push('/todolist');
           console.log(res);
         })
         .catch((err) => {
