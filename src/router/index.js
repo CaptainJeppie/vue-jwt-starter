@@ -2,8 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from '../components/Home.vue';
 import todolist from '../components/todolist/todolist.vue';
-import createTodolist from '../components/todolist/createTodolist.vue';	
-import editTodolist from '../components/todolist/editTodolist.vue';
+import createTask from '../components/todolist/createTask.vue';	
+import editTask from '../components/todolist/editTask.vue';
 import Login from '../components/Login.vue';
 
 const router = createRouter({
@@ -12,8 +12,8 @@ const router = createRouter({
     { path: '/', component: Home },
     { path: '/todolist', component: todolist },
     { path: '/login', component: Login },
-    { path: '/createtodolist', component: createTodolist },
-    { path: '/edittodolist/:id', component: editTodolist, props: true }
+    { path: '/createTask', component: createTask },
+    { path: '/edittask/:id', component: editTask, props: true }
   ]
 })
 

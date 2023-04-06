@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+  <nav class="navbar navbar-expand-md navbar-dark mb-4">
     <div class="container-fluid">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
         <li class="nav-item">
@@ -7,7 +7,7 @@
             >Home</router-link
           >
         </li>      
-        <li class="nav-item" v-if="store.isLoggedIn">
+        <li class="nav-item">
           <router-link to="/todolist" class="nav-link" active-class="active"
             >To-do-list</router-link
           >
@@ -23,17 +23,16 @@
 </template>
 
 <script>
-import { useHenkStore } from "../stores/store";
-
 export default {
-  setup() {
-    return{
-      store: useHenkStore()
-    }
-    },
   name: "Navigation",
 };
 </script>
 
 <style>
+nav{
+    background-color: rgb(196, 160, 114);
+    color: white;
+    font-weight: bold;
+    font-size: x-large;
+}
 </style>

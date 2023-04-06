@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1>Create Task</h1>
+        <h1>Edit Task</h1>
         <form>
             <div class="form-group">
                 <label for="taskName">Task Name</label><br>
@@ -32,16 +32,20 @@
                     <option>Completed</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary" @click="CreateTask">Submit</button>
+            <button type="submit" class="btn btn-primary" @click="updateTask()">Save Changes</button>
+            <button type="submit" class="btn btn-danger" @click="this.$router.push('/todolist')">Cancel</button>
         </form>
     </div>
 </template>
 
 <script>
-import axios from "../../axios-auth";
+import axios from "axios";
 
 export default {
-    name: "CreateTodolist",
+    name: "EditTask",
+    props: {
+        id: Number,
+    },
     data() {
         return {
             task: {
@@ -54,18 +58,26 @@ export default {
         };
     },
     methods: {
-        CreateTask() {
+        updateTask() {
             axios
-                .post("http://localhost/todolist", this.task)
+                .put("http://localhost/todolist/" + this.task.id, this.task)
                 .then((res) => {
                     console.log(res.data);
                     this.$refs.form.reset();
                     this.$router.push("/todolist");
                 })
                 .catch((error) => console.log(error));
-        }
+        },
     },
-
+    mounted() {
+        axios
+            .get("http://localhost/todolist/" + this.id)
+            .then((result) => {
+                console.log(result);
+                this.task = result.data;
+            })
+            .catch((error) => console.log(error));
+    },
 }
 </script>
 

@@ -22,14 +22,8 @@
 
 <script>
 import axios from "../axios-auth";
-import { useHenkStore } from "../stores/store";
 
 export default {
-  setup() {
-    return{
-      store: useHenkStore()
-    }
-    },
   name: "Login",
   data() {
     return {
@@ -39,12 +33,18 @@ export default {
   },
   methods: {
     login() {
-      this.store.login(this.username, this.password)
-      .then(result => {
-        this.$router.push('/products');
-      }).catch(error => {
-        console.log(error);
-      });
+      axios
+        .post("users/login", {
+          username: this.username,
+          password: this.password,
+        })
+        .then((res) => {
+          this.$router.push('/products');
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };

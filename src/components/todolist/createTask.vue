@@ -32,7 +32,7 @@
                     <option>Completed</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary" @click="CreateTask">Submit</button>
+            <button type="submit" class="btn btn-primary" @click="CreateTask()">Submit</button>
         </form>
     </div>
 </template>
@@ -55,18 +55,16 @@ export default {
     },
     methods: {
         CreateTask() {
-            axios
-                .post("http://localhost/todolist", this.task)
-                .then((res) => {
-                    console.log(res.data);
-                    this.$refs.form.reset();
-                    this.$router.push("/todolist");
+            axios.post('/todolist', this.task)
+                .then((result) => {
+                    console.log(result);
                 })
                 .catch((error) => console.log(error));
-        }
-    },
-
-}
+                this.$router.push('/todolist');
+        },
+    }
+};
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>
