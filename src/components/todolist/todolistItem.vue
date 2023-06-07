@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../../axios-auth";
 
 export default {
     name: "TodolistItem",
@@ -30,8 +30,11 @@ export default {
     },
     methods: {
         deleteTask(id) {
+            if (localStorage.getItem('jwt') != null) {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('jwt');
+            }
             axios
-                .delete("http://localhost/todolist/" + id)
+                .delete("todolist/" + id)
                 .then((result) => {
                     console.log(result);
                     this.$emit('update')
@@ -46,20 +49,22 @@ export default {
 </script>
 
 <style lang="scss">
-body{
+body {
     background-color: #EDE6E6;
 }
-.card-header{
+
+.card-header {
     background-color: rgb(196, 160, 114);
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: #ffffff;
 }
-.card-body{
+
+.card-body {
     background-color: rgb(228, 206, 177);
 }
-.card-footer{
+
+.card-footer {
     background-color: rgb(196, 160, 114);
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: #ffffff;
-}
-</style>
+}</style>

@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../../axios-auth";
 
 export default {
     name: "EditTask",
@@ -58,6 +58,7 @@ export default {
             task: {
                 id: "",
                 name: "",
+                username: localStorage.getItem('username'),
                 description: "",
                 priority: "Low",
                 dueDate: "",
@@ -67,26 +68,33 @@ export default {
     },
     methods: {
         updateTask() {
+            if (localStorage.getItem('jwt') != null) {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('jwt');
+            }
             axios({
                 method: 'put',
-                url: "http://localhost/todolist/" + this.task.id,
+                url: "todolist/" + this.task.id,
                 data: {
                     id: this.task.id,
                     name: this.task.name,
+                    username: this.task.username,
                     description: this.task.description,
                     priority: this.task.priority,
                     dueDate: this.task.dueDate,
                     status: this.task.status,
                 }
-            }).then((result) =>{
+            }).then((result) => {
                 console.log(result);
             }).catch((error) => console.log(error));
             this.$router.push('/todolist');
         },
     },
     mounted() {
+        if (localStorage.getItem('jwt') != null) {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('jwt');
+        }
         axios
-            .get("http://localhost/todolist/" + this.id)
+            .get("todolist/" + this.id)
             .then((result) => {
                 console.log(result);
                 this.task = result.data;

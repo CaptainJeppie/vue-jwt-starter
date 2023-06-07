@@ -1,33 +1,14 @@
-# Vue JWT starter project
+# Vue eindopdracht webdevelopment 2
 
-This project is meant as a starting point for a lecture about adding JWT authentication and state management to a vue app
+Een todolist app voor de eindopdracht van web development 2. Je kan accounts aanmaken en inloggen. dan krijg je tasks te zien die van die user zijn en kan je daar volledige crud operaties op uitvoeren.
+
+### Logingegevens
+
+username: username,     password: password
+username: Pietje,       password: 123
+username: Han,          password: 123
 
 ### Sources
-css: [FormRbtn](https://codepen.io/ig_design/pen/dLNKgM)
+[Vue](https://github.com/ahrnuld/vue-jwt-starter) + [RestAPI](https://github.com/ahrnuld/restapi-complete)
 
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```

@@ -53,6 +53,7 @@ export default {
         return {
             task: {
                 name: "",
+                username: localStorage.getItem('username'),
                 description: "",
                 priority: "Low",
                 dueDate: "",
@@ -62,6 +63,9 @@ export default {
     },
     methods: {
         CreateTask() {
+            if (localStorage.getItem('jwt') != null) {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('jwt');
+            }
             axios.post('/todolist', this.task)
                 .then((result) => {
                     console.log(result);
@@ -74,7 +78,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#selectPriority{
+#selectPriority {
     display: flex;
     flex-direction: column;
     justify-content: center;

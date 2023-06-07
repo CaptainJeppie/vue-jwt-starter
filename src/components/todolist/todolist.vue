@@ -1,16 +1,11 @@
 <template>
-    <section>
+  <section>
     <div class="container">
-        
-        <h2 class="mt-3 mt-lg-5">Tasks</h2>
-        <button type="button" class="btn btn-primary mt-3" @click="this.$router.push('/createTask');"> Create Task </button>
+
+      <h2 class="mt-3 mt-lg-5">Tasks</h2>
+      <button type="button" class="btn btn-primary mt-3" @click="this.$router.push('/createTask');"> Create Task </button>
       <div class="row mt-3">
-        <TodolistItem
-          v-for="task in Tasks"
-          :key="task.id"
-          :task="task"
-          @update="update"
-        />
+        <TodolistItem v-for="task in Tasks" :key="task.id" :task="task" @update="update" />
       </div>
     </div>
   </section>
@@ -36,8 +31,11 @@ export default {
   },
   methods: {
     update() {
+      if (localStorage.getItem('jwt') != null) {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('jwt');
+      }
       axios
-        .get("http://localhost/todolist")
+        .get("todolist?username=" + localStorage.getItem('username'))
         .then((result) => {
           console.log(result);
           this.Tasks = result.data;
@@ -48,6 +46,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
